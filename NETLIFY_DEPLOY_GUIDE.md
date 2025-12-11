@@ -309,3 +309,4 @@ https://your-site.netlify.app
 ---
 
 **Следующий шаг:** Деплой backend на AWS/Railway/Render
+

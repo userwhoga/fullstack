@@ -1,0 +1,120 @@
+====================================
+🚀 ПОЛНЫЙ ГАЙД ПО ДЕПЛОЮ FULLSTACK
+====================================
+
+✅ ЧТО УЖЕ СДЕЛАНО:
+-------------------
+1. ✓ Фронтенд задеплоен на Netlify: https://fullstack9569.netlify.app
+2. ✓ Код загружен на GitHub: https://github.com/userwhoga/fullstack
+3. ✓ Настроены переменные окружения для API
+
+
+📋 ЧТО ОСТАЛОСЬ СДЕЛАТЬ:
+------------------------
+
+ВАРИАНТ 1: RAILWAY.APP (Рекомендуется)
+======================================
+
+1. Откройте: https://railway.app/new
+2. Нажмите "Continue with GitHub"
+3. Выберите репозиторий: userwhoga/fullstack
+4. Railway автоматически определит Spring Boot
+
+5. Добавьте MariaDB:
+   - Нажмите "+ New" → "Database" → "Add MariaDB"
+   
+6. Настройте переменные окружения:
+   Variables:
+   - SPRING_DATASOURCE_URL = ${MYSQL_URL}
+   - SPRING_DATASOURCE_USERNAME = ${MYSQL_USER}
+   - SPRING_DATASOURCE_PASSWORD = ${MYSQL_PASSWORD}
+
+7. Скопируйте URL бэкенда (будет как: https://your-app.up.railway.app)
+
+8. Запустите: UPDATE_API_URL.bat
+   И введите URL вашего бэкенда
+
+
+ВАРИАНТ 2: RENDER.COM (Проще, бесплатно)
+========================================
+
+1. Откройте: https://render.com/
+2. Sign Up / Log in с GitHub
+3. New → Web Service
+4. Выберите репозиторий: userwhoga/fullstack
+5. Настройки:
+   - Name: fullstack-backend
+   - Environment: Docker
+   - Build Command: ./gradlew build
+   - Start Command: java -jar build/libs/*.jar
+   
+6. Добавьте PostgreSQL database (бесплатно):
+   - Dashboard → New → PostgreSQL
+   
+7. Подключите переменные:
+   - SPRING_DATASOURCE_URL = ${DATABASE_URL}
+
+8. Deploy!
+
+9. Скопируйте URL и запустите: UPDATE_API_URL.bat
+
+
+ВАРИАНТ 3: HEROKU (Классика)
+=============================
+
+1. Установите Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli
+2. Откройте PowerShell в папке бэкенда:
+   cd C:\Users\User\Downloads\Full_Stack\Full_Stack
+
+3. Команды:
+   heroku login
+   heroku create fullstack-backend
+   heroku addons:create jawsdb:kitefin
+   git push heroku main
+
+4. Скопируйте URL и запустите: UPDATE_API_URL.bat
+
+
+====================================
+💡 ПОЛЕЗНЫЕ КОМАНДЫ
+====================================
+
+Локальный запуск фронтенда:
+   npm run dev
+
+Локальный запуск бэкенда:
+   cd C:\Users\User\Downloads\Full_Stack\Full_Stack
+   ./gradlew bootRun
+
+Пересборка и деплой фронтенда:
+   npm run build
+   netlify deploy --prod --dir=dist
+
+
+====================================
+🔧 TROUBLESHOOTING
+====================================
+
+Если фронтенд не видит бэкенд:
+1. Проверьте CORS настройки в Spring Boot
+2. Убедитесь что VITE_API_URL добавлен в Netlify
+3. Проверьте что бэкенд запущен и доступен
+
+Если бэкенд не запускается:
+1. Проверьте логи в Railway/Render
+2. Убедитесь что база данных подключена
+3. Проверьте переменные окружения
+
+
+====================================
+📞 ПОДДЕРЖКА
+====================================
+
+Railway: https://railway.app/help
+Render:  https://render.com/docs
+Netlify: https://docs.netlify.com
+
+GitHub репозиторий: https://github.com/userwhoga/fullstack
+
+
+Удачи! 🚀
