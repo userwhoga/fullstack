@@ -1,0 +1,47 @@
+{
+  "name": "chapter12-frontend-setup",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Глава 12: Setting Up the Frontend for Our Spring Boot RESTful Web Service",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "docker:build": "docker build -t carfrontend .",
+    "docker:run": "docker run -p 80:80 --name carfrontend carfrontend",
+    "docker:stop": "docker stop carfrontend && docker rm carfrontend",
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down",
+    "compose:logs": "docker-compose logs -f",
+    "deploy:netlify": "netlify deploy --prod --dir=dist",
+    "deploy:vercel": "vercel --prod"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.18.0",
+    "@mui/material": "^5.14.18",
+    "@tanstack/react-query": "^4.36.1",
+    "ag-grid-community": "^30.2.0",
+    "ag-grid-react": "^30.2.0",
+    "axios": "^1.6.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jsdom": "^21.1.7",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@vitejs/plugin-react": "^4.2.0",
+    "jsdom": "^26.0.0",
+    "typescript": "^5.3.2",
+    "vite": "^7.2.4",
+    "vitest": "^2.1.5"
+  }
+}

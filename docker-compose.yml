@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # MariaDB Database
+  mariadb:
+    image: mariadb:latest
+    container_name: cardb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cardb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Spring Boot Backend
+  # Note: You need to create a Dockerfile in your backend project
+  # Uncomment when backend Dockerfile is ready
+  # backend:
+  #   build:
+  #     context: ../backend-project-path
+  #     dockerfile: Dockerfile
+  #   container_name: carapp
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/cardb
+  #     SPRING_DATASOURCE_USERNAME: user
+  #     SPRING_DATASOURCE_PASSWORD: password
+  #     SERVER_PORT: 8081
+  #   ports:
+  #     - "8081:8081"
+  #   depends_on:
+  #     mariadb:
+  #       condition: service_healthy
+  #   networks:
+  #     - app-network
+
+  # React Frontend
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: carfrontend
+    ports:
+      - "80:80"
+    # Uncomment if you want frontend to communicate with backend in same network
+    # depends_on:
+    #   - backend
+    networks:
+      - app-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+
